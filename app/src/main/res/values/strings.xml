@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">PharmApp_Final</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAdjLwdDFNQ8UQL5vy4IZt0MzInmXmpiFA</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

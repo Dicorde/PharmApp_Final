@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragmento.InformacionFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/location">
+
+    </com.airbnb.lottie.LottieAnimationView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Bienvenido!"
+        android:gravity="center"
+        android:textColor="#212121"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PharmApp es una aplicacion desarrollada por estudiantes de la Universidad de Cordoba con el fin de ayudar a los usuarios a ubicar las farmacias que esten cerca de su hogar"
+        android:textColor="#757575"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:gravity="center"
+        />
+
+</LinearLayout>

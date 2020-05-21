@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/perfilIv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_person_black_24dp"></ImageView>
+
+        <TextView
+            android:id="@+id/messageTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="#DDDCD2"
+            android:padding="15dp"
+            android:text="su mensaje"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/HoraTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="16/05/2020 3:05 PM"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/vistoTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="delivered"
+        android:textAlignment="textEnd"
+        android:visibility="gone" />
+
+
+</LinearLayout>

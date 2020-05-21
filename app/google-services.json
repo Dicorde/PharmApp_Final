@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "367877382311",
+    "firebase_url": "https://pharmapp-final.firebaseio.com",
+    "project_id": "pharmapp-final",
+    "storage_bucket": "pharmapp-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367877382311:android:99a9e2568d64d2341f7b82",
+        "android_client_info": {
+          "package_name": "com.example.diego.diploma.pharmapp_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367877382311-i8b0t2neie6i4r7l0tsr48q1f0esmb5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn-zDwueAFj5W3hKFreXY1rs-AK1kmVvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367877382311-i8b0t2neie6i4r7l0tsr48q1f0esmb5p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
