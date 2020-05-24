@@ -50,7 +50,8 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
         holder.mEmailTv.setText(userEmail);
 
         try{
-            Picasso.get().load(userImagen).placeholder(R.drawable.ic_home).into(holder.mAvatarIV);
+            Picasso.get().load("https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png").centerCrop().into(holder.mAvatarIV);
+            Log.d("ITEMCLICK", "siiii : "+userImagen + " => "+holder.mAvatarIV );
         }
         catch (Exception e){
 
@@ -70,6 +71,8 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
                 context.startActivity(intent);
             }
         });
+
+
 
     }
 

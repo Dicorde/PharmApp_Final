@@ -10,14 +10,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.diego.diploma.pharmapp_final.Activity.EditarUsuario;
 import com.example.diego.diploma.pharmapp_final.Activity.Login;
 import com.example.diego.diploma.pharmapp_final.Activity.MainActivity;
+import com.example.diego.diploma.pharmapp_final.Activity.Registro;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +41,7 @@ public class PerfilFragment extends Fragment {
 
     ImageView avatarIv;
     TextView nameTv, emailTv, phoneTv;
+    Button Update;
 
 
 
@@ -60,8 +64,17 @@ public class PerfilFragment extends Fragment {
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
+        Update = view.findViewById(R.id.Update);
 
+        Update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EditarUsuario.class);
+                startActivity(intent);
+                Log.d("ITEMCLICK", "siiii : "+intent );
 
+            }
+        });
         //metodo para obtener los datos y mostrarlos en perfil
        firebaseFirestore.collection("Users").document(user.getUid()).get().
                addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -92,6 +105,8 @@ public class PerfilFragment extends Fragment {
 
            }
        });
+
+
 
 
 

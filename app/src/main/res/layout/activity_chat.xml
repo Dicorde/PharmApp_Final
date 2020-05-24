@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1EDED"
+    app:menu="@menu/menu_buscar"
     tools:context=".Activity.Chat">
 
     <android.widget.Toolbar
@@ -19,8 +20,7 @@
         <ImageView
             android:id="@+id/perfilIv"
             android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_person_black_24dp" />
+            android:layout_height="50dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

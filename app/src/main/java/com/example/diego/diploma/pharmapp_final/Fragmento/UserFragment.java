@@ -24,19 +24,12 @@ import com.example.diego.diploma.pharmapp_final.Modelo.UsuarioMode;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.example.diego.diploma.pharmapp_final.Adapter.AdapterUsuario;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +91,11 @@ public class UserFragment extends Fragment {
                                 String image = "" + usuarioMode.getImagen();
                                 //adaptador
                                 adapterUsuario = new AdapterUsuario(getActivity(), Lista);
+
+
                                 //set adaptador to recycler view
                                 recyclerView.setAdapter(adapterUsuario);
+                                Log.d("ITEMCLICK", "siiii : "+ recyclerView);
                             }
                         }
                     } else {
@@ -112,17 +108,16 @@ public class UserFragment extends Fragment {
 
 
 
-    /*private void searchUsers(final String query){
+    private void searchUsers(final String query){
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //get path of database named "users" containing users info
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.addValueEventListener(new ValueEventListener() {
+        firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list.clear();
-                for (DataSnapshot ds :dataSnapshot.getChildren()){
-                    UsuarioMode usuarioMode = ds.getValue(UsuarioMode.class);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Lista.clear();
+                for (DocumentSnapshot ds :task.getResult()){
+                    UsuarioMode usuarioMode = ds.toObject(UsuarioMode.class);
 
                     //conditiones to fulfil seearch:
                     //1) ser not current user
@@ -131,26 +126,20 @@ public class UserFragment extends Fragment {
                     //get all user excep currently signed in user
                     if(!usuarioMode.getUid().equals(user.getUid())){
                         if(usuarioMode.getName().toLowerCase().contains(query.toLowerCase()) ||
-                        usuarioMode.getEmail().toLowerCase().contains(query.toLowerCase())){
-                            list.add(usuarioMode);
+                                usuarioMode.getEmail().toLowerCase().contains(query.toLowerCase())){
+                            Lista.add(usuarioMode);
                         }
 
                     }
 
                 } //adaptador
-                adapterUsuario = new AdapterUsuario(getActivity(),list);
+                adapterUsuario = new AdapterUsuario(getActivity(),Lista);
                 //refresh adapter
                 //set adaptador to recycler view
                 recyclerView.setAdapter(adapterUsuario);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+        }
         });
-
-    }*/
+    }
 
 
     private  void  checkUserStatus(){
@@ -168,10 +157,44 @@ public class UserFragment extends Fragment {
         setHasOptionsMenu(true); //to show menu
         super.onCreate(savedInstanceState);
     }
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_buscar, menu);
+        //search view
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        //search listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                //called when user press search button frm keyboard
+                //if search query is not empty the search
+                if(!TextUtils.isEmpty(s.trim())){
+                    searchUsers(s);
+                }else{
+                    AllgetUser();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //called when user press search button frm keyboard
+                //if search query is not empty the search
+                if(!TextUtils.isEmpty(s.trim())){
+                    searchUsers(s);
+                }else{
+                   AllgetUser();
+                }
+                return false;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {

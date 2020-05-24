@@ -1,5 +1,6 @@
 package com.example.diego.diploma.pharmapp_final.Activity;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,7 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.diego.diploma.pharmapp_final.Adapter.AdapterUsuario;
+
 import com.example.diego.diploma.pharmapp_final.R;
 import com.example.diego.diploma.pharmapp_final.Adapter.AdapterChat;
 import com.example.diego.diploma.pharmapp_final.Modelo.ChatMode;
@@ -28,17 +30,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
@@ -47,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.Nullable;
+
 
 
 public class Chat extends AppCompatActivity {
@@ -85,6 +80,7 @@ public class Chat extends AppCompatActivity {
         messageEt = findViewById(R.id.messageEt);
         sendBtn = findViewById(R.id.sendBtn);
 
+
         //layout (linearlayout) para recyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(Chat.this);
         //linea de codigo que pne los mensaje de arriba hacia abajo
@@ -98,21 +94,30 @@ public class Chat extends AppCompatActivity {
         final Intent intent = getIntent();
 
 
-
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         hisUid = intent.getStringExtra("hisUid");
         nameUid = intent.getStringExtra("nameUid");
-        String name = "" +nameUid;
+        String name = "" + nameUid;
         //set data
         nameTv.setText(name);
+        try {
+            //image rreceived set it to imageview in toolbat
+            Picasso.get().load(hiimage).into(perfilTv);
+
+        } catch (Exception e) {
+            //there is exception gettin picture set default picture
+            Picasso.get().load(R.drawable.ic_person_black_24dp).into(perfilTv);
+
+
+        }
 
         //buscar usuario para obtener esa información de los usuarios
 
 
-       LeerMessage();
+        LeerMessage();
 
 
         //click button enviar mensaje
@@ -122,11 +127,11 @@ public class Chat extends AppCompatActivity {
                 //obtener texto de edit text
                 String message = messageEt.getText().toString().trim();
                 //verificar si el text es vacio
-                if(TextUtils.isEmpty(message)){
+                if (TextUtils.isEmpty(message)) {
                     Toast.makeText(Chat.this, "no se envio el mensae", Toast.LENGTH_SHORT).show();
 
 
-                }else{
+                } else {
                     //text no vacio
                     sendMessage(message);
                     LeerMessage();
@@ -135,9 +140,6 @@ public class Chat extends AppCompatActivity {
             }
 
         });
-
-
-
     }
 
 
@@ -155,7 +157,7 @@ public class Chat extends AppCompatActivity {
                             HashMap<String, Object> hasSeenHashMap = new HashMap<>();
                             hasSeenHashMap.put("visto", true);
                             ds.getReference().update(hasSeenHashMap);
-                            Log.d("ITEMCLICK", "siiii : "+ myUid + " => " +hasSeenHashMap);
+                        //    Log.d("ITEMCLICK", "siiii : "+ myUid + " => " +hasSeenHashMap);
                         }
 
                     }
@@ -188,13 +190,6 @@ public class Chat extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
     private void sendMessage(String message) {
 
         String timestamp = String.valueOf(System.currentTimeMillis());
@@ -209,12 +204,7 @@ public class Chat extends AppCompatActivity {
         //restablecer editar texto después de enviar el mensaje
         messageEt.setText("");
 
-        Log.d("ITEMCLICK", "claro : "+ myUid + " => " +message);
         VerMessage();
-
-
-
-        //crear nodo / hijo de lista de chat en la base de datos de Firebase
 
     }
 
@@ -245,27 +235,10 @@ public class Chat extends AppCompatActivity {
         public boolean onCreateOptionsMenu (Menu menu){
             MenuInflater inflater = getMenuInflater();
             getMenuInflater().inflate(R.menu.menu_main, menu);
-            return true;
 
             //vista de búsqueda
-            //   menu.findItem(R.id.action_search).setVisible(true);
-            //return super.onCreateOptionsMenu(menu);
-        }
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            switch (item.getItemId()) {
-
-                case R.id.action_logout:
-                    FirebaseAuth miAuth = FirebaseAuth.getInstance();
-                    miAuth.signOut();
-                    Intent intent = new Intent(Chat.this, Login.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
+            menu.findItem(R.id.action_search).setVisible(true);
+            return super.onCreateOptionsMenu(menu);
         }
 
     }

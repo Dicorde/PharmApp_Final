@@ -37,6 +37,8 @@ public class ExplorarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_explorar, container, false);
         // Inflar el diseño de este fragmento
             ir_mapa= view.findViewById(R.id.ir_mapa);
+
+
         ir_mapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

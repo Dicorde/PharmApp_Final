@@ -18,9 +18,9 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/mAvatarIV"
             android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/ic_home" />
+            android:layout_height="70dp" />
 
     </LinearLayout>
 

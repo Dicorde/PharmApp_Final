@@ -37,6 +37,9 @@
         <activity
             android:name=".Activity.Explorar"
             android:theme="@style/FullScreen" />
+        <activity
+            android:name=".Activity.EditarUsuario"
+            android:theme="@style/FullScreen" />
 
         <activity
             android:name=".DashboardActivity"/>
