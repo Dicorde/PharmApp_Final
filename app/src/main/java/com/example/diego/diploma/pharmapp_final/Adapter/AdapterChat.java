@@ -45,7 +45,6 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
     Context context;
     List<ChatMode> chalist;
     String imageUrl;
-
     FirebaseUser fUser;
     FirebaseFirestore firebaseFirestore;
 

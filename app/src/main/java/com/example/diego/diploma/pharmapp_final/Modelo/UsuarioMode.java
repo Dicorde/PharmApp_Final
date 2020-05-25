@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UsuarioMode {
 
-    String name, email, search, phoone, imagen, cover, uid, onlineStatus, typingTo;//adding two more fields
+    String name, email, search, phoone, imagenUsu, cover, uid, onlineStatus, typingTo;//adding two more fields
 
 
     public UsuarioMode() {
@@ -14,12 +14,13 @@ public class UsuarioMode {
 
     //use same name as in firebase database
 
-    public UsuarioMode(String name, String email, String search, String phoone, String imagen, String cover, String uid, String onlineStatus, String typingTo) {
+    public UsuarioMode(String name, String email, String search, String phoone, String imagenUsu, String cover, String uid, String onlineStatus,
+                       String typingTo) {
         this.name = name;
         this.email = email;
         this.search = search;
         this.phoone = phoone;
-        this.imagen = imagen;
+        this.imagenUsu = imagenUsu;
         this.cover = cover;
         this.uid = uid;
         this.onlineStatus = onlineStatus;
@@ -58,12 +59,12 @@ public class UsuarioMode {
         this.phoone = phoone;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getImagenUsu() {
+        return imagenUsu;
     }
 
     public void setImagen(String imagen) {
-        this.imagen = imagen;
+        this.imagenUsu = imagen;
     }
 
     public String getCover() {

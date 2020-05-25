@@ -65,7 +65,7 @@ public class Chat extends AppCompatActivity {
 
     String hisUid;
     String myUid;
-    String hiimage;
+    String images;
     String nameUid;
 
     @Override
@@ -100,22 +100,20 @@ public class Chat extends AppCompatActivity {
 
         hisUid = intent.getStringExtra("hisUid");
         nameUid = intent.getStringExtra("nameUid");
+        images = intent.getStringExtra("images");
+
         String name = "" + nameUid;
-        //set data
         nameTv.setText(name);
         try {
-            //image rreceived set it to imageview in toolbat
-            Picasso.get().load(hiimage).into(perfilTv);
+            Picasso.get().load(images).into(perfilTv);
 
         } catch (Exception e) {
-            //there is exception gettin picture set default picture
             Picasso.get().load(R.drawable.ic_person_black_24dp).into(perfilTv);
 
 
         }
 
         //buscar usuario para obtener esa información de los usuarios
-
 
         LeerMessage();
 
@@ -181,7 +179,7 @@ public class Chat extends AppCompatActivity {
                     chatlista.add(chat);
 
 
-                }     adapterChat = new AdapterChat(Chat.this, chatlista, hiimage);
+                }     adapterChat = new AdapterChat(Chat.this, chatlista, images);
                         //set adapter to recyclerview
                         recyclerView.setAdapter(adapterChat);
                         recyclerView.smoothScrollToPosition(chatlista.size());
