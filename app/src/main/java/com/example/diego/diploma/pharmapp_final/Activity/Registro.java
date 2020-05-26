@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.diego.diploma.pharmapp_final.R;
@@ -28,11 +29,13 @@ public class Registro extends AppCompatActivity {
     private EditText nombreUsuario, editcorreo, editcontraseña, edittelefono;
     private Button registro;
     private ProgressDialog progressDialog;
+    private Switch typeUser;
 
     private String name = "";
     private String email = "";
     private String password = "";
     private String phone = "";
+    private Boolean type = false;
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -52,6 +55,7 @@ public class Registro extends AppCompatActivity {
         edittelefono = (EditText) findViewById(R.id.reg_telefono);
         registro = (Button) findViewById(R.id.enviar_registro);
         progressDialog = new ProgressDialog(this);
+        typeUser = (Switch) findViewById(R.id.typeUser);
 
 
         registro.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +65,7 @@ public class Registro extends AppCompatActivity {
                 email = editcorreo.getText().toString();
                 password = editcontraseña.getText().toString();
                 phone = edittelefono.getText().toString();
+                type = typeUser.isChecked();
 
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() && !phone.isEmpty()) {
                     if (password.length() >= 6) {
@@ -95,6 +100,7 @@ public class Registro extends AppCompatActivity {
                     map.put("password", password);
                     map.put("phone", phone);
                     map.put("imagenUsu", "");
+                    map.put("type", type);
 
                     db.collection("Users").document(user.getUid()).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

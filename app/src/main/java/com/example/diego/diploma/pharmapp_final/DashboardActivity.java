@@ -3,6 +3,7 @@ package com.example.diego.diploma.pharmapp_final;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -11,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.diego.diploma.pharmapp_final.Activity.Login;
 //import com.example.diego.diploma.pharmapp_final.Fragmento.ChatListaFragment;
+import com.example.diego.diploma.pharmapp_final.Activity.RegistrarFarmacia;
+import com.example.diego.diploma.pharmapp_final.Activity.Registro;
 import com.example.diego.diploma.pharmapp_final.Fragmento.ExplorarFragment;
 //import com.example.diego.diploma.pharmapp_final.Fragmento.PerfilFragment;
 //import com.example.diego.diploma.pharmapp_final.Fragmento.UserFragment;
@@ -18,13 +21,22 @@ import com.example.diego.diploma.pharmapp_final.Fragmento.ExplorarFragment;
 import com.example.diego.diploma.pharmapp_final.Fragmento.InformacionFragment;
 import com.example.diego.diploma.pharmapp_final.Fragmento.PerfilFragment;
 import com.example.diego.diploma.pharmapp_final.Fragmento.UserFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.protobuf.BoolValue;
+import com.squareup.picasso.Picasso;
 
 public class DashboardActivity extends AppCompatActivity {
 FirebaseAuth firebaseAuth;
+FirebaseUser user;
+FirebaseFirestore firebaseFirestore;
 ActionBar actionBar;
+FloatingActionButton addFarmacyBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +46,8 @@ ActionBar actionBar;
         actionBar.setTitle("perfil");
 
         firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
@@ -43,7 +57,26 @@ ActionBar actionBar;
         FragmentTransaction  ft1 = getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.content,fragment1,"");
         ft1.commit();
-
+        addFarmacyBtn = (FloatingActionButton) findViewById(R.id.addFarmacy);
+        firebaseFirestore.collection("Users").document(user.getUid()).get().
+            addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists() ){
+                        Boolean type = documentSnapshot.getBoolean("type");
+                        if (type) {
+                            addFarmacyBtn.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            });
+        addFarmacyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, RegistrarFarmacia.class);
+                startActivity(intent);
+            }
+        });
     }
 private BottomNavigationView.OnNavigationItemSelectedListener selectedListener=
         new BottomNavigationView.OnNavigationItemSelectedListener() {

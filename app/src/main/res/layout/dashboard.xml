@@ -16,7 +16,22 @@
         android:layout_weight="1">
 
 
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addFarmacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#03A9F4"
+            android:clickable="true"
+            android:focusable="auto"
+            android:src="@android:drawable/ic_input_add"
+            android:tint="#FFFFFF"
+            android:visibility="invisible"
+            app:fabSize="auto"
+            tools:srcCompat="@android:drawable/ic_input_add"
+            tools:visibility="invisible" />
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,8 +40,8 @@
         android:layout_height="65dp"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemIconTint="@color/com_facebook_button_send_background_color"
+        app:itemTextColor="@color/com_facebook_button_send_background_color"
         app:menu="@menu/menu_nav">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

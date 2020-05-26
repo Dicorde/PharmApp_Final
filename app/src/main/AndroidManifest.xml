@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.diego.diploma.pharmapp_final">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,6 +9,44 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.RegistrarFarmacia">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.diego.diploma.pharmapp_final.Activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Activity.Chat"
+            android:theme="@style/AppThemeNo">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.diego.diploma.pharmapp_final.Activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Activity.Registro"
+            android:theme="@style/AppThemeMainLogi" />
+        <activity
+            android:name=".Activity.Login"
+            android:theme="@style/AppThemeMainLogi" />
+        <activity
+            android:name=".Activity.Explorar"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name=".Activity.EditarUsuario"
+            android:theme="@style/FullScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.diego.diploma.pharmapp_final.Activity.MainActivity" />
+        </activity>
+        <activity android:name=".DashboardActivity" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:theme="@style/AppThemeMainLogi">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -20,41 +54,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".Activity.Chat"
-            android:theme="@style/AppThemeNo">
-        </activity>
-
-        <activity
-            android:name=".Activity.Registro"
-            android:theme="@style/AppThemeMainLogi" />
-
-        <activity
-            android:name=".Activity.Login"
-            android:theme="@style/AppThemeMainLogi" />
-
-        <activity
-            android:name=".Activity.Explorar"
-            android:theme="@style/FullScreen" />
-        <activity
-            android:name=".Activity.EditarUsuario"
-            android:theme="@style/FullScreen" />
-
-        <activity
-            android:name=".DashboardActivity"/>
-
-        <activity
-            android:name=".Activity.MainActivity"
-            android:theme="@style/AppThemeMainLogi">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

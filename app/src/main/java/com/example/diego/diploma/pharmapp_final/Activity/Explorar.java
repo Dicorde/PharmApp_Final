@@ -76,4 +76,5 @@ public class Explorar extends FragmentActivity implements OnMapReadyCallback {
                 }
                 break;
         }
-    }}
+    }
+}

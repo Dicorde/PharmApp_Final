@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/nav_Info"
-        android:title="Info"
-        android:icon="@drawable/ic_info"/>
+    <item
+        android:id="@+id/nav_Info"
+        android:icon="@drawable/ic_info"
+        android:title="Informacion" />
 
     <item android:id="@+id/nav_perfil"
         android:title="Perfil"
