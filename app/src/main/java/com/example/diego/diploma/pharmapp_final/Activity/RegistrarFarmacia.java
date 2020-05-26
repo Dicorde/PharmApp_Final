@@ -142,10 +142,12 @@ public class RegistrarFarmacia extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void registerFarmacy() {
+        FirebaseUser user = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         Map<String, Object> map = new HashMap<>();
+        map.put("uid", user.getUid());
         map.put("name", name);
         map.put("address", address);
         map.put("lng", lng);

@@ -8,7 +8,10 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.diego.diploma.pharmapp_final.Adapter.AdapterUsuario;
+import com.example.diego.diploma.pharmapp_final.Modelo.UsuarioMode;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -18,8 +21,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Explorar extends FragmentActivity implements OnMapReadyCallback {
     Location currentLocation;
@@ -66,6 +73,19 @@ public class Explorar extends FragmentActivity implements OnMapReadyCallback {
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
         mMap.addMarker(markerOptions);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Farmacies").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot farmacy : task.getResult()) {
+                        LatLng latLngFarmacy = new LatLng(farmacy.getDouble("lat"), farmacy.getDouble("lng"));
+                        MarkerOptions MarkerFarmacy = new MarkerOptions().position(latLngFarmacy).title(farmacy.getString("name"));
+                        mMap.addMarker(MarkerFarmacy);
+                    }
+                }
+            }
+        });
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
