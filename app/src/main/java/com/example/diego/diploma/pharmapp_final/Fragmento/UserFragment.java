@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,7 @@ public class UserFragment extends Fragment {
     List<UsuarioMode> Lista;
     FirebaseFirestore firebaseFirestore;
     FirebaseUser user;
+    ImageView perfilIv;
 
     public UserFragment() {
         // Required empty public constructor
@@ -58,6 +61,7 @@ public class UserFragment extends Fragment {
 
         //Inflar el diseño de este fragmento
         View view = inflater.inflate(R.layout.fragment_user, container, false);
+        perfilIv = view.findViewById(R.id.perfilIv);
 
         recyclerView = view.findViewById(R.id.users_recyclerView);
         //propiedades
@@ -65,6 +69,7 @@ public class UserFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         //init user list
@@ -88,14 +93,14 @@ public class UserFragment extends Fragment {
                                 String name = "" + usuarioMode.getName();
                                 String email = "" + usuarioMode.getEmail();
                                 String phone = "" + usuarioMode.getPhoone();
-                                String image = "" + usuarioMode.getImagen();
+                                String image = "" + usuarioMode.getImagenUsu();
+
                                 //adaptador
                                 adapterUsuario = new AdapterUsuario(getActivity(), Lista);
-
-
                                 //set adaptador to recycler view
                                 recyclerView.setAdapter(adapterUsuario);
                                 Log.d("ITEMCLICK", "siiii : "+ recyclerView);
+
                             }
                         }
                     } else {
@@ -137,6 +142,7 @@ public class UserFragment extends Fragment {
                 //refresh adapter
                 //set adaptador to recycler view
                 recyclerView.setAdapter(adapterUsuario);
+
         }
         });
     }

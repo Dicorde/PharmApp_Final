@@ -39,7 +39,7 @@ public class PerfilFragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     DatabaseReference databaseReference;
 
-    ImageView avatarIv;
+    ImageView perfilIv;
     TextView nameTv, emailTv, phoneTv;
     Button Update;
 
@@ -60,7 +60,7 @@ public class PerfilFragment extends Fragment {
         user = firebaseAuth.getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        avatarIv = view.findViewById(R.id.avatarIv);
+        perfilIv = view.findViewById(R.id.perfilIv);
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
@@ -91,9 +91,9 @@ public class PerfilFragment extends Fragment {
                        emailTv.setText(email);
                        phoneTv.setText(phone);
                    try {
-                       Picasso.get().load(image).into(avatarIv);
+                       Picasso.get().load(image).into(perfilIv);
                    } catch (Exception e) {
-                       Picasso.get().load(R.drawable.ic_person_black_24dp).into(avatarIv);
+                       Picasso.get().load(R.drawable.ic_person_black_24dp).into(perfilIv);
                    }
 
                } else {

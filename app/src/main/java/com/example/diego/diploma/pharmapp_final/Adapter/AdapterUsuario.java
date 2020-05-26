@@ -42,7 +42,7 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
     public void onBindViewHolder(@NonNull Myholder holder, int position) {
         //get datos
         final String miuid= userLista.get(position).getUid();
-        String userImagen = userLista.get(position).getImagen();
+        final String userImagen = userLista.get(position).getImagenUsu();
         final String userName=userLista.get(position).getName();
         final String userEmail=userLista.get(position).getEmail();
         //set datos
@@ -50,10 +50,10 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
         holder.mEmailTv.setText(userEmail);
 
         try{
-            Picasso.get().load("https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png").centerCrop().into(holder.mAvatarIV);
-            Log.d("ITEMCLICK", "siiii : "+userImagen + " => "+holder.mAvatarIV );
+            Picasso.get().load(userImagen).into(holder.perfilIv);
         }
         catch (Exception e){
+            Picasso.get().load(R.drawable.ic_person_black_24dp).into(holder.perfilIv);
 
         }
 
@@ -61,12 +61,14 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Click user from user list to start chatting/messaging
-                //start activity by putting uid of receiver
-                // we will use that uid to identify the user we are gonna chat
+                // Haga clic en el usuario de la lista de usuarios para comenzar a chatear / enviar mensajes
+                // comienza la actividad colocando el uid del receptor
+                // usaremos ese uid para identificar al usuario con el que vamos a chatear
                 Intent intent = new Intent(context, Chat.class);
                 intent.putExtra("hisUid", miuid);
                 intent.putExtra("nameUid", userName);
+                intent.putExtra("images", userImagen);
+                Log.d("ITEMCLICK", "para q: "+ userImagen );
 
                 context.startActivity(intent);
             }
@@ -84,14 +86,14 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
     //view holder class
     class Myholder extends RecyclerView.ViewHolder{
 
-        ImageView mAvatarIV;
+        ImageView perfilIv;
         TextView nNameTv, mEmailTv;
 
 
         public Myholder(@NonNull View itemView) {
             super(itemView);
 
-            mAvatarIV= itemView.findViewById(R.id.avatarIv);
+            perfilIv= itemView.findViewById(R.id.perfilIv);
             nNameTv= itemView.findViewById(R.id.nameTv);
             mEmailTv= itemView.findViewById(R.id.emailTv);
 
