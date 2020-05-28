@@ -85,7 +85,7 @@ private BottomNavigationView.OnNavigationItemSelectedListener selectedListener=
          // opcines para las navegaxion inferior
                 switch (menuItem.getItemId()) {
                     case R.id.nav_Info:
-                        actionBar.setTitle("Info");
+                        actionBar.setTitle("Informacion");
                         InformacionFragment fragment1 = new InformacionFragment();
                         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                         ft1.replace(R.id.content, fragment1, "");

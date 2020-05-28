@@ -18,6 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
     private EditText editcorreo, editcontraseña;
@@ -72,6 +78,18 @@ public class Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    String email = user.getEmail();
+                    String idUsu = user.getUid();
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("name","");
+                    map.put("uid", idUsu);
+                    map.put("email", email);
+                    map.put("password", "");
+                    map.put("phone", "");
+                    map.put("imagenUsu", "");
+                    map.put("type", "");
                     startActivity(new Intent(Login.this, DashboardActivity.class));
                     progressDialog.setMessage("Realizando Ingreso en linea...");
                     progressDialog.show();

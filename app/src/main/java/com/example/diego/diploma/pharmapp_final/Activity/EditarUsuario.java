@@ -115,7 +115,6 @@ public class EditarUsuario extends AppCompatActivity {
                             map.put("password", password);
                             map.put("phone", phone);
                             map.put("imagenUsu", "");
-                              Log.d("ITEMCLICK", "siiii : "+map );
 
                      firebaseFirestore.collection("Users").document(user.getUid()).update(map).
                              addOnSuccessListener(new OnSuccessListener<Void>() {

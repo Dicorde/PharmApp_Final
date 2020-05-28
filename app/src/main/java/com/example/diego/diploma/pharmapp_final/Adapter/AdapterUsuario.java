@@ -68,7 +68,7 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
                 intent.putExtra("hisUid", miuid);
                 intent.putExtra("nameUid", userName);
                 intent.putExtra("images", userImagen);
-                Log.d("ITEMCLICK", "para q: "+ userImagen );
+              //  Log.d("ITEMCLICK", "para q: "+ userImagen );
 
                 context.startActivity(intent);
             }

@@ -99,7 +99,7 @@ public class UserFragment extends Fragment {
                                 adapterUsuario = new AdapterUsuario(getActivity(), Lista);
                                 //set adaptador to recycler view
                                 recyclerView.setAdapter(adapterUsuario);
-                                Log.d("ITEMCLICK", "siiii : "+ recyclerView);
+                            //    Log.d("ITEMCLICK", "siiii : "+ recyclerView);
 
                             }
                         }
