@@ -32,7 +32,7 @@
             android:theme="@style/FullScreen" />
         <activity
             android:name=".Activity.EditarUsuario"
-            android:theme="@style/FullScreen">
+            android:theme="@style/AppThemeMainLogi">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.diego.diploma.pharmapp_final.Activity.MainActivity" />
