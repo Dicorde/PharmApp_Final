@@ -4,6 +4,7 @@ package com.example.diego.diploma.pharmapp_final.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,7 @@ import com.example.diego.diploma.pharmapp_final.R;
 import com.example.diego.diploma.pharmapp_final.Adapter.AdapterChat;
 import com.example.diego.diploma.pharmapp_final.Modelo.ChatMode;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,10 +41,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Locale;
+import java.util.Objects;
 
 
 public class Chat extends AppCompatActivity {
@@ -102,20 +105,23 @@ public class Chat extends AppCompatActivity {
         nameUid = intent.getStringExtra("nameUid");
         images = intent.getStringExtra("images");
 
+
         String name = "" + nameUid;
         nameTv.setText(name);
+
+
         try {
             Picasso.get().load(images).into(perfilTv);
 
         } catch (Exception e) {
             Picasso.get().load(R.drawable.ic_person_black_24dp).into(perfilTv);
 
-
         }
+
 
         //buscar usuario para obtener esa información de los usuarios
 
-        LeerMessage();
+       LeerMessage();
 
 
         //click button enviar mensaje
@@ -138,106 +144,102 @@ public class Chat extends AppCompatActivity {
             }
 
         });
+
+
     }
 
+        private void VerMessage() {
+            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
-   private void VerMessage() {
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+            firebaseFirestore.collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot ds : task.getResult()) {
+                            ChatMode chat = ds.toObject(ChatMode.class);
+                            if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)) {
 
-        firebaseFirestore.collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot ds : task.getResult()) {
-                        ChatMode chat = ds.toObject(ChatMode.class);
-                        if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)) {
+                                HashMap<String, Object> hasSeenHashMap = new HashMap<>();
+                                hasSeenHashMap.put("visto", true);
+                                ds.getReference().update(hasSeenHashMap);
+                            //    Log.d("ITEMCLICK", "siiii : "+ myUid + " => " +hasSeenHashMap);
+                            }
 
-                            HashMap<String, Object> hasSeenHashMap = new HashMap<>();
-                            hasSeenHashMap.put("visto", true);
-                            ds.getReference().update(hasSeenHashMap);
-                        //    Log.d("ITEMCLICK", "siiii : "+ myUid + " => " +hasSeenHashMap);
                         }
-
                     }
                 }
-            }
-        });
+            });
 
-    }
+        }
 
+        private void LeerMessage() {
+            chatlista = new ArrayList<>();
+            firebaseFirestore.collection("Chat").orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot dat: task.getResult()){
+                         ChatMode chat = dat.toObject(ChatMode.class);
 
-    private void LeerMessage() {
-        chatlista = new ArrayList<>();
-        firebaseFirestore.collection("Chat").orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    for (DocumentSnapshot dat: task.getResult()){
-                     ChatMode chat = dat.toObject(ChatMode.class);
-
-                if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)
-                        || chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid)) {
-                    chatlista.add(chat);
+                    if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)
+                            || chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid)) {
+                        chatlista.add(chat);
 
 
-                }     adapterChat = new AdapterChat(Chat.this, chatlista, images);
-                        //set adapter to recyclerview
-                        recyclerView.setAdapter(adapterChat);
-                        recyclerView.smoothScrollToPosition(chatlista.size());
-            }}
-        });
-    }
+                    }     adapterChat = new AdapterChat(Chat.this, chatlista, images);
+                            //set adapter to recyclerview
+                            recyclerView.setAdapter(adapterChat);
+                            recyclerView.smoothScrollToPosition(chatlista.size());
+                }}
+            });
+        }
 
+        private void sendMessage(String message) {
 
-    private void sendMessage(String message) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
 
-        String timestamp = String.valueOf(System.currentTimeMillis());
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("sender", myUid);
+            hashMap.put("receiver", hisUid);
+            hashMap.put("message", message);
+            hashMap.put("timestamp", timestamp);
+            hashMap.put("visto", false);
+            FirebaseFirestore.getInstance().collection("Chat").add(hashMap);
+            //restablecer editar texto después de enviar el mensaje
+            messageEt.setText("");
 
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("sender", myUid);
-        hashMap.put("receiver", hisUid);
-        hashMap.put("message", message);
-        hashMap.put("timestamp", timestamp);
-        hashMap.put("visto", false);
-        FirebaseFirestore.getInstance().collection("Chat").add(hashMap);
-        //restablecer editar texto después de enviar el mensaje
-        messageEt.setText("");
+            VerMessage();
 
-        VerMessage();
-
-    }
+        }
 
         private void checkUserStatus () {
-            //get current user
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // el usuario ha iniciado sesión quédate con ella
-                 // establece el correo electrónico del usuario conectado
-                 //perfiltv.setText (user.getEmail ())
-                myUid = user.getUid();//currently signed in use
-            } else {
-                startActivity(new Intent(this, Login.class));
-                finish();
+                //get current user
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // el usuario ha iniciado sesión quédate con ella
+                     // establece el correo electrónico del usuario conectado
+                     //perfiltv.setText (user.getEmail ())
+                    myUid = user.getUid();//currently signed in use
+                } else {
+                    startActivity(new Intent(this, Login.class));
+                    finish();
+                }
             }
-        }
-        protected void onStart () {
-            checkUserStatus();
-            super.onStart();
-        }
 
-       /* protected void onPause () {
-            super.onPause();
-            firebaseFirestore.r
-                    removeEventListener(seenListener);
-        }*/
+
+        protected void onStart () {
+                checkUserStatus();
+                super.onStart();
+            }
+
 
         public boolean onCreateOptionsMenu (Menu menu){
-            MenuInflater inflater = getMenuInflater();
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+                MenuInflater inflater = getMenuInflater();
+                getMenuInflater().inflate(R.menu.menu_main, menu);
 
-            //vista de búsqueda
-            menu.findItem(R.id.action_search).setVisible(true);
-            return super.onCreateOptionsMenu(menu);
-        }
+                //vista de búsqueda
+                menu.findItem(R.id.action_search).setVisible(true);
+                return super.onCreateOptionsMenu(menu);
+            }
 
     }
 

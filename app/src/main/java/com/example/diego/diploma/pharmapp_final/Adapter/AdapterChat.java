@@ -94,7 +94,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         }
 
      //cuadro de dialogo para mensaje de elimianr
-        holder.mensajeLayout.setOnClickListener(new View.OnClickListener() {
+       holder.mensajeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -141,7 +141,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
     }
 
 
-    private void deleteMessage( int position){
+   private void deleteMessage( int position){
 
         final String myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -150,7 +150,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         String msgTimeStamp = chalist.get(position).getTimestamp();
 
         CollectionReference chatRef = firebaseFirestore.collection("Chat");
-        Log.d("ITEMCLICK", "paraqu : "+ chatRef);
+
 
         Query query = chatRef.orderBy("timestamp");
         Log.d("ITEMCLICK", "para : "+ query.orderBy("timestamp"));

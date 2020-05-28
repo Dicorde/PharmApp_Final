@@ -8,6 +8,7 @@
     tools:context=".Activity.Login">
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="258dp"
         android:layout_height="157dp"
         android:layout_marginStart="24dp"
@@ -25,17 +26,19 @@
 
     <TextView
         android:id="@+id/nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_width="99dp"
+        android:layout_height="25dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="532dp"
+        android:layout_marginBottom="520dp"
+        android:gravity="center"
         android:text="PharmaApp"
         android:textColor="#CCCCCC"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/reg_correo"
@@ -87,19 +90,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/ir_regitrarse"
-        android:layout_width="221dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="252dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="211dp"
+        android:layout_height="54dp"
         android:layout_marginStart="32dp"
+        android:layout_marginBottom="244dp"
         android:background="@android:color/transparent"
         android:text="no account? create one!"
         android:textColor="#e4f9f5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintHorizontal_bias="0.797"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -108,7 +111,8 @@
         android:layout_height="24dp"
         android:layout_gravity="center"
         android:layout_margin="200px"
-        android:text="© Copyright 2020 - Todos los Derechos Reservados"
+        android:gravity="center"
+        android:text="© Copyright 2020 -  Monteria"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.example.diego.diploma.pharmapp_final.Activity.MainActivity;
 import com.example.diego.diploma.pharmapp_final.Activity.Registro;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +43,8 @@ public class PerfilFragment extends Fragment {
 
     ImageView perfilIv;
     TextView nameTv, emailTv, phoneTv;
-    Button Update;
+    private Switch typeUser;
+    FloatingActionButton Update;
 
 
 
@@ -64,6 +67,7 @@ public class PerfilFragment extends Fragment {
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
+        typeUser = view.findViewById(R.id.typeUser);
         Update = view.findViewById(R.id.Update);
 
         Update.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +75,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EditarUsuario.class);
                 startActivity(intent);
-                Log.d("ITEMCLICK", "siiii : "+intent );
+             //   Log.d("ITEMCLICK", "siiii : "+intent );
 
             }
         });
@@ -86,10 +90,15 @@ public class PerfilFragment extends Fragment {
                        String email = "" + documentSnapshot.getString("email");
                        String phone = "" + documentSnapshot.getString("phone");
                        String image = "" + documentSnapshot.getString("imagenUsu");
+                       boolean ty = Boolean.parseBoolean(""+documentSnapshot.getBoolean("type"));
 
                        nameTv.setText(name);
                        emailTv.setText(email);
                        phoneTv.setText(phone);
+                       typeUser.setChecked(Boolean.parseBoolean(String.valueOf(ty)));
+                       //typeUser.setText(ty);
+
+
                    try {
                        Picasso.get().load(image).into(perfilIv);
                    } catch (Exception e) {
