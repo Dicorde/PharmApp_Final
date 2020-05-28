@@ -1,15 +1,20 @@
 package com.example.diego.diploma.pharmapp_final;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.diego.diploma.pharmapp_final.Activity.Explorar;
 import com.example.diego.diploma.pharmapp_final.Activity.Login;
 //import com.example.diego.diploma.pharmapp_final.Fragmento.ChatListaFragment;
 import com.example.diego.diploma.pharmapp_final.Activity.RegistrarFarmacia;
@@ -32,11 +37,12 @@ import com.google.protobuf.BoolValue;
 import com.squareup.picasso.Picasso;
 
 public class DashboardActivity extends AppCompatActivity {
-FirebaseAuth firebaseAuth;
-FirebaseUser user;
-FirebaseFirestore firebaseFirestore;
-ActionBar actionBar;
-FloatingActionButton addFarmacyBtn;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    FirebaseFirestore firebaseFirestore;
+    ActionBar actionBar;
+    private boolean showMap = false;
+    private static final int REQUEST_CODE = 101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,26 +63,17 @@ FloatingActionButton addFarmacyBtn;
         FragmentTransaction  ft1 = getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.content,fragment1,"");
         ft1.commit();
-        addFarmacyBtn = (FloatingActionButton) findViewById(R.id.addFarmacy);
-        firebaseFirestore.collection("Users").document(user.getUid()).get().
-            addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if (documentSnapshot.exists() ){
-                        Boolean type = documentSnapshot.getBoolean("type");
-                        if (type) {
-                            addFarmacyBtn.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }
-            });
-        addFarmacyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, RegistrarFarmacia.class);
-                startActivity(intent);
-            }
-        });
+
+
+
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        } else {
+            showMap = true;
+        }
     }
 private BottomNavigationView.OnNavigationItemSelectedListener selectedListener=
         new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -107,14 +104,16 @@ private BottomNavigationView.OnNavigationItemSelectedListener selectedListener=
                         ft3.commit();
                         return true;
                     case  R.id.nav_Explorar:
-                        actionBar.setTitle("Explorar");
-                        ExplorarFragment fragment5 = new ExplorarFragment();
-                        FragmentTransaction  ft5 = getSupportFragmentManager().beginTransaction();
-                        ft5.replace(R.id.content,fragment5,"");
-                        ft5.commit();
-                        return true;
-
-
+                        if (showMap) {
+                            startActivity(new Intent(DashboardActivity.this, Explorar.class));
+                        } else {
+                            actionBar.setTitle("Explorar");
+                            ExplorarFragment fragment5 = new ExplorarFragment();
+                            FragmentTransaction  ft5 = getSupportFragmentManager().beginTransaction();
+                            ft5.replace(R.id.content,fragment5,"");
+                            ft5.commit();
+                            return true;
+                        }
                 }
 
                 return false;
@@ -131,14 +130,12 @@ private BottomNavigationView.OnNavigationItemSelectedListener selectedListener=
             startActivity(new Intent(DashboardActivity.this, Login.class));
             finish();
         }
-        }
-        @Override
-        protected  void onStart(){
+    }
+    @Override
+    protected  void onStart(){
         checkUserStatus();
         super.onStart();
-        }
-
-
+    }
 }
 
 

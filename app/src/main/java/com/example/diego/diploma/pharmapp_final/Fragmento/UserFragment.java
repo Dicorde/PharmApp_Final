@@ -100,10 +100,8 @@ public class UserFragment extends Fragment {
                                 //set adaptador to recycler view
                                 recyclerView.setAdapter(adapterUsuario);
                                 Log.d("ITEMCLICK", "siiii : "+ recyclerView);
-
                             }
                         }
-                    } else {
                     }
                 }
             });

@@ -29,7 +29,11 @@
             android:theme="@style/AppThemeMainLogi" />
         <activity
             android:name=".Activity.Explorar"
-            android:theme="@style/FullScreen" />
+            android:theme="@style/FullScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.diego.diploma.pharmapp_final.Activity.MainActivity" />
+        </activity>
         <activity
             android:name=".Activity.EditarUsuario"
             android:theme="@style/FullScreen">
