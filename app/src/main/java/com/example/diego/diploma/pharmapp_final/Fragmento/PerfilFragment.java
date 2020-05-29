@@ -1,6 +1,7 @@
 package com.example.diego.diploma.pharmapp_final.Fragmento;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,11 +97,10 @@ public class PerfilFragment extends Fragment {
                        emailTv.setText(email);
                        phoneTv.setText(phone);
                        typeUser.setChecked(Boolean.parseBoolean(String.valueOf(ty)));
-                       //typeUser.setText(ty);
 
 
                    try {
-                       Picasso.get().load(image).into(perfilIv);
+                       Picasso.get().load(image).resize(330,330).into(perfilIv);
                    } catch (Exception e) {
                        Picasso.get().load(R.drawable.ic_person_black_24dp).into(perfilIv);
                    }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.diego.diploma.pharmapp_final..Activity.Chat;
 import com.example.diego.diploma.pharmapp_final.Activity.Chat;
+import com.example.diego.diploma.pharmapp_final.Fragmento.UserFragment;
 import com.example.diego.diploma.pharmapp_final.Modelo.UsuarioMode;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.example.diego.diploma.pharmapp_final.Modelo.UsuarioMode;
@@ -28,6 +29,9 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
     public AdapterUsuario(Context context, List<UsuarioMode> userLista) {
         this.context = context;
         this.userLista = userLista;
+    }
+
+    public AdapterUsuario(Class<UserFragment> userFragmentClass, List<UsuarioMode> lista) {
     }
 
     @NonNull
@@ -68,7 +72,6 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
                 intent.putExtra("hisUid", miuid);
                 intent.putExtra("nameUid", userName);
                 intent.putExtra("images", userImagen);
-              //  Log.d("ITEMCLICK", "para q: "+ userImagen );
 
                 context.startActivity(intent);
             }

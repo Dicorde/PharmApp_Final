@@ -10,8 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
@@ -24,6 +26,7 @@ import com.example.diego.diploma.pharmapp_final.Activity.MainActivity;
 import com.example.diego.diploma.pharmapp_final.Modelo.UsuarioMode;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.example.diego.diploma.pharmapp_final.Adapter.AdapterUsuario;
+import com.example.diego.diploma.pharmapp_final.Activity.RegistrarFarmacia;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +53,7 @@ public class UserFragment extends Fragment {
     FirebaseUser user;
     ImageView perfilIv;
 
+
     public UserFragment() {
         // Required empty public constructor
     }
@@ -62,6 +66,7 @@ public class UserFragment extends Fragment {
         //Inflar el diseño de este fragmento
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         perfilIv = view.findViewById(R.id.perfilIv);
+
 
         recyclerView = view.findViewById(R.id.users_recyclerView);
         //propiedades
@@ -89,12 +94,14 @@ public class UserFragment extends Fragment {
                         for (DocumentSnapshot ds : task.getResult()) {
                             UsuarioMode usuarioMode = ds.toObject(UsuarioMode.class);
                             if (!usuarioMode.getUid().equals(user.getUid())) {
+
                                 Lista.add(usuarioMode);
                                 String name = "" + usuarioMode.getName();
                                 String email = "" + usuarioMode.getEmail();
                                 String phone = "" + usuarioMode.getPhoone();
                                 String image = "" + usuarioMode.getImagenUsu();
 
+                            //    Log.d("ITEMCLICK",  "ff"+dire);
                                 //adaptador
                                 adapterUsuario = new AdapterUsuario(getActivity(), Lista);
                                 //set adaptador to recycler view

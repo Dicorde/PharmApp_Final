@@ -3,8 +3,10 @@ package com.example.diego.diploma.pharmapp_final.Activity;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,6 +16,7 @@ import android.view.View;
 
 import com.example.diego.diploma.pharmapp_final.Adapter.AdapterUsuario;
 import com.example.diego.diploma.pharmapp_final.DashboardActivity;
+import com.example.diego.diploma.pharmapp_final.Fragmento.UserFragment;
 import com.example.diego.diploma.pharmapp_final.Modelo.UsuarioMode;
 import com.example.diego.diploma.pharmapp_final.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,6 +39,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
+
 public class Explorar extends FragmentActivity implements OnMapReadyCallback {
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -45,6 +50,10 @@ public class Explorar extends FragmentActivity implements OnMapReadyCallback {
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    RecyclerView recyclerView;
+    AdapterUsuario adapterUsuario;
+    List<UsuarioMode> Lista;
+
     public Explorar() {
         // Required empty public constructor
     }
@@ -122,11 +131,17 @@ public class Explorar extends FragmentActivity implements OnMapReadyCallback {
                         MarkerOptions MarkerFarmacy = new MarkerOptions().position(latLngFarmacy).title(farmacy.getString("name"));
                         MarkerFarmacy.icon(BitmapDescriptorFactory.fromResource(R.drawable.pharmacy));
                         mMap.addMarker(MarkerFarmacy);
+
+
+
+
                     }
                 }
             }
         });
     }
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {

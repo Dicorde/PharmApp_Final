@@ -38,14 +38,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/userStatusTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="en linea"
-                android:textColor="#F9F9FA"
-                android:textStyle="bold"/>
-
         </LinearLayout>
 
 

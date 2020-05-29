@@ -12,13 +12,45 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
+      <ImageView
+          android:id="@+id/perfilIv"
+          android:layout_width="107dp"
+          android:layout_height="109dp"
+          android:layout_marginStart="100dp"
+          android:layout_marginTop="30dp"
+          android:layout_marginEnd="99dp"
+          android:layout_marginBottom="16dp"
+          android:background="#204BE8"
+          android:padding="5dp"
+          android:src="@drawable/ic_person_black_24dp"
+          app:layout_constraintBottom_toTopOf="@+id/reg_name"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.59"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/login_user">
+
+      </ImageView>
+
+
+      <Button
+          android:id="@+id/galeria_foto"
+          android:layout_width="47dp"
+          android:layout_height="32dp"
+          android:layout_marginStart="120dp"
+          android:layout_marginEnd="24dp"
+          android:layout_marginBottom="400dp"
+          android:background="@drawable/ic_gale"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@+id/perfilIv"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"></Button>
+
       <EditText
           android:id="@+id/reg_name"
           android:layout_width="329dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
-          android:layout_marginTop="48dp"
-          android:layout_marginBottom="508dp"
+          android:layout_marginBottom="32dp"
           android:background="@drawable/input"
           android:hint="  Nombre de Usuario"
           android:inputType="text"
@@ -28,73 +60,19 @@
           android:paddingBottom="10dp"
           android:textColor="#FFFFFF"
           android:textColorHint="#ccc"
-          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintBottom_toBottomOf="@id/reg_correo"
+          app:layout_constraintBottom_toTopOf="@+id/reg_correo"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.455"
+          app:layout_constraintHorizontal_bias="0.454"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/login_user" />
-
-      <EditText
-          android:id="@+id/reg_telefono"
-          android:layout_width="329dp"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="16dp"
-          android:layout_marginBottom="272dp"
-          android:background="@drawable/input"
-          android:ems="10"
-          android:hint="  Ingrese su telefono"
-          android:inputType="phone"
-          android:paddingLeft="10dp"
-          android:paddingTop="10dp"
-          android:paddingBottom="10dp"
-          android:textColor="#FFFFFF"
-          android:textColorHint="#ccc"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.455"
-          app:layout_constraintStart_toStartOf="parent" />
-
-      <EditText
-          android:id="@+id/reg_contra"
-          android:layout_width="329dp"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="16dp"
-          android:layout_marginBottom="348dp"
-          android:background="@drawable/input"
-          android:ems="10"
-          android:hint="  Ingrese su contraseña"
-          android:inputType="textPassword"
-          android:paddingLeft="10dp"
-          android:paddingTop="10dp"
-          android:paddingBottom="10dp"
-          android:textColor="#FFFFFF"
-          android:textColorHint="#ccc"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.455"
-          app:layout_constraintStart_toStartOf="parent" />
-
-      <TextView
-          android:id="@+id/login_user"
-          android:layout_width="248dp"
-          android:layout_height="50dp"
-          android:layout_marginTop="62dp"
-          android:layout_marginBottom="10dp"
-          android:text="Sign Up Now!"
-          android:textColor="#e4f9f5"
-          android:textSize="30sp"
-          app:layout_constraintBottom_toTopOf="@+id/reg_name"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.496"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toBottomOf="@+id/perfilIv" />
 
       <EditText
           android:id="@+id/reg_correo"
           android:layout_width="329dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
-          android:layout_marginBottom="428dp"
+          android:layout_marginBottom="444dp"
           android:background="@drawable/input"
           android:hint="  Ingrese su correo electronico"
           android:inputType="textEmailAddress"
@@ -106,9 +84,43 @@
           android:textColorHint="#ccc"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.455"
+          app:layout_constraintHorizontal_bias="0.454"
           app:layout_constraintStart_toStartOf="parent" />
 
+      <Switch
+          android:id="@+id/typeUser"
+          android:layout_width="208dp"
+          android:layout_height="39dp"
+          android:layout_marginStart="50dp"
+          android:layout_marginTop="100dp"
+          android:layout_marginEnd="200dp"
+          android:text="Soy farmaceutico"
+          android:textColor="#FFFFFF"
+          app:layout_constraintBottom_toTopOf="@+id/enviar_registro"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.085"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/reg_telefono" />
+
+      <EditText
+          android:id="@+id/reg_contra"
+          android:layout_width="329dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginBottom="364dp"
+          android:background="@drawable/input"
+          android:ems="10"
+          android:hint="  Ingrese su contraseña"
+          android:inputType="textPassword"
+          android:paddingLeft="10dp"
+          android:paddingTop="10dp"
+          android:paddingBottom="10dp"
+          android:textColor="#FFFFFF"
+          android:textColorHint="#ccc"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.454"
+          app:layout_constraintStart_toStartOf="parent" />
 
       <Button
           android:id="@+id/enviar_registro"
@@ -124,6 +136,42 @@
           app:layout_constraintHorizontal_bias="0.445"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/typeUser" />
+
+      <EditText
+          android:id="@+id/reg_telefono"
+          android:layout_width="329dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginBottom="288dp"
+          android:background="@drawable/input"
+          android:ems="10"
+          android:hint="  Ingrese su telefono"
+          android:inputType="phone"
+          android:paddingLeft="10dp"
+          android:paddingTop="10dp"
+          android:paddingBottom="10dp"
+          android:textColor="#FFFFFF"
+          android:textColorHint="#ccc"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.454"
+          app:layout_constraintStart_toStartOf="parent" />
+
+
+      <TextView
+          android:id="@+id/login_user"
+          android:layout_width="248dp"
+          android:layout_height="50dp"
+          android:layout_marginStart="102dp"
+          android:layout_marginTop="40dp"
+          android:layout_marginEnd="100dp"
+          android:gravity="center"
+          android:text="Sign Up Now!"
+          android:textColor="#e4f9f5"
+          android:textSize="30sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
           android:id="@+id/textView"
@@ -143,19 +191,5 @@
           app:layout_constraintTop_toBottomOf="@+id/enviar_registro"
           app:layout_constraintVertical_bias="0.052" />
 
-      <Switch
-          android:id="@+id/typeUser"
-          android:layout_width="208dp"
-          android:layout_height="39dp"
-          android:layout_marginStart="50dp"
-          android:layout_marginTop="100dp"
-          android:layout_marginEnd="200dp"
-          android:text="Soy farmaceutico"
-          android:textColor="#FFFFFF"
-          app:layout_constraintBottom_toTopOf="@+id/enviar_registro"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.085"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/reg_telefono" />
    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

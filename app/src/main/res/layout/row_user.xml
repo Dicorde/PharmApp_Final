@@ -33,7 +33,7 @@
             android:id="@+id/nameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="75dp"
             android:text="Nombre"
             android:textColor="#FCFCFD"
             android:textSize="18sp" />
@@ -42,10 +42,20 @@
             android:id="@+id/emailTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="75dp"
             android:text="Email"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/phoneTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:text="Telefono"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+
 
 
     </LinearLayout>

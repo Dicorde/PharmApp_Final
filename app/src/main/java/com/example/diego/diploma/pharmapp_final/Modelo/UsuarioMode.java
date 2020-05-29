@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UsuarioMode {
 
-    String name, email, search, phoone, imagenUsu, cover, uid, onlineStatus, typingTo;//adding two more fields
+    String name, email, search, phoone, imagenUsu, cover, uid, onlineStatus, type;//adding two more fields
 
 
     public UsuarioMode() {
@@ -24,7 +24,7 @@ public class UsuarioMode {
         this.cover = cover;
         this.uid = uid;
         this.onlineStatus = onlineStatus;
-        this.typingTo = typingTo;
+        this.type = typingTo;
     }
 
     public String getName() {
@@ -92,10 +92,10 @@ public class UsuarioMode {
     }
 
     public String getTypingTo() {
-        return typingTo;
+        return type;
     }
 
     public void setTypingTo(String typingTo) {
-        this.typingTo = typingTo;
+        this.type= typingTo;
     }
 }
