@@ -49,9 +49,11 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
         final String userImagen = userLista.get(position).getImagenUsu();
         final String userName=userLista.get(position).getName();
         final String userEmail=userLista.get(position).getEmail();
+        final String userPhone= userLista.get(position).getPhone();
         //set datos
         holder.nNameTv.setText(userName);
         holder.mEmailTv.setText(userEmail);
+        holder.mPhone.setText(userPhone);
 
         try{
             Picasso.get().load(userImagen).into(holder.perfilIv);
@@ -72,6 +74,7 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
                 intent.putExtra("hisUid", miuid);
                 intent.putExtra("nameUid", userName);
                 intent.putExtra("images", userImagen);
+                intent.putExtra("phone", userPhone);
 
                 context.startActivity(intent);
             }
@@ -90,7 +93,7 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
     class Myholder extends RecyclerView.ViewHolder{
 
         ImageView perfilIv;
-        TextView nNameTv, mEmailTv;
+        TextView nNameTv, mEmailTv, mPhone;
 
 
         public Myholder(@NonNull View itemView) {
@@ -99,6 +102,8 @@ public class AdapterUsuario extends RecyclerView.Adapter<AdapterUsuario.Myholder
             perfilIv= itemView.findViewById(R.id.perfilIv);
             nNameTv= itemView.findViewById(R.id.nameTv);
             mEmailTv= itemView.findViewById(R.id.emailTv);
+            mPhone = itemView.findViewById(R.id.phoneTv);
+
 
         }
 

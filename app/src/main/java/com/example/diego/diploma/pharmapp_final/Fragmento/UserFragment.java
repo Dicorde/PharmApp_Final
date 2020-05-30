@@ -98,10 +98,10 @@ public class UserFragment extends Fragment {
                                 Lista.add(usuarioMode);
                                 String name = "" + usuarioMode.getName();
                                 String email = "" + usuarioMode.getEmail();
-                                String phone = "" + usuarioMode.getPhoone();
+                                String phone = "" + usuarioMode.getPhone();
                                 String image = "" + usuarioMode.getImagenUsu();
 
-                            //    Log.d("ITEMCLICK",  "ff"+dire);
+                               Log.d("ITEMCLICK",  "ff"+phone);
                                 //adaptador
                                 adapterUsuario = new AdapterUsuario(getActivity(), Lista);
                                 //set adaptador to recycler view
